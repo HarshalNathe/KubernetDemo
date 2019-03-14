@@ -1,0 +1,17 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: Kubernetes-Demo
+host: 172.25.16.194:3030
+basePath: /api
+schemes:
+  - http
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  $ref: ./app/swagger/paths/index.yaml
+definitions:
+  $ref: ./app/swagger/definitions/index.yaml

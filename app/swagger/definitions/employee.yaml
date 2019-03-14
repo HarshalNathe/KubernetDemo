@@ -1,0 +1,18 @@
+type: object
+properties:
+  id:
+    type: string
+  firstName:
+    type: string
+  lastName:
+    type: string
+  age:
+    type: number
+  contact:
+    type: string
+  address:
+    type: string
+  isActive:
+    type: boolean
+  createdAt:
+    type: string

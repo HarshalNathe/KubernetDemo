@@ -1,0 +1,28 @@
+{
+  "name": "angular",
+  "version": "1.0.0",
+  "dependencies": {
+    "bootstrap": "3.3.7",
+    "angular": "1.6.8",
+    "angular-ui-router": "1.0.11",
+    "bootstrap-switch": "3.3.4",
+    "twitter-bootstrap-wizard": "^1.4.2",
+    "simple-line-icons": "^2.4.1",
+    "font-awesome": "^4.7.0",
+    "angular-animate": "1.6.8"
+  },
+  "overrides": {
+    "font-awesome": {
+      "main": [
+        "css/font-awesome.css"
+      ]
+    }
+  },
+  "resolutions": {
+    "angular": "1.6.8",
+    "angular-ui-router": "1.0.11",
+    "bootstrap": "3.3.7",
+    "angular-animate": "1.6.8",
+    "bootstrap-switch": "3.3.4"
+  }
+}

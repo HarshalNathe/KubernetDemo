@@ -1,0 +1,6 @@
+Error:
+  $ref: ./error.yaml
+Response:
+  $ref: ./Response.yaml
+Employee:
+  $ref: ./employee.yaml

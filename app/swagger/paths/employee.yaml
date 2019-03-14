@@ -1,0 +1,92 @@
+x-swagger-router-controller: employee-controller
+post:
+  operationId: employeePost
+  description: "Create a new employee"
+  summary: "Create a new employee"
+  tags:
+    - "/Employee"
+  parameters:
+    - name: employee
+      in: body
+      description: "Fill up the employee details"
+      required: true
+      schema:
+        $ref: "#/definitions/Employee"
+  responses:
+    "200":
+      description: "Success"
+      schema:
+        $ref: "#/definitions/Employee"
+    "403":
+      description: "Pass valid data"
+      schema:
+        $ref: "#/definitions/Error"
+get:
+  operationId: employeeGet
+  description: "Get all employee"
+  summary: "Get all employee"
+  tags:
+    - "/Employee"
+  parameters:
+    - name: skip
+      in: query
+      description: "Specify the number of records to skip"
+      required: false
+      type: integer
+    - name: limit
+      in: query
+      description: "Provide limit value range is 1 - 1000"
+      required: false
+      type: integer
+  responses:
+    "200":
+      description: "Success"
+      schema:
+        $ref: "#/definitions/Employee"
+    "403":
+      description: "Invalid employee"
+      schema:
+        $ref: "#/definitions/Error"
+put:
+  operationId: employeePut
+  description: "Update a existing employee"
+  summary: "Update a existing employee"
+  tags:
+    - "/Employee"
+  parameters:
+    - name: employee
+      in: body
+      description: "Fill up the employee details to be updated"
+      required: true
+      schema:
+        $ref: "#/definitions/Employee"
+  responses:
+    "200":
+      description: "Success"
+      schema:
+        $ref: "#/definitions/Employee"
+    "403":
+      description: "Pass valid data"
+      schema:
+        $ref: "#/definitions/Error"
+delete:
+  operationId: employeeDelete
+  description: "Delete employee through employeeId"
+  summary: "Delete employee through employeeId"
+  tags:
+    - "/Employee"
+  parameters:
+    - name: employeeId
+      in: query
+      description: "Provide employeeId"
+      required: true
+      type: string
+  responses:
+    "200":
+      description: "Success"
+      schema:
+        $ref: "#/definitions/Employee"
+    "403":
+      description: "Wrong ID"
+      schema:
+        $ref: "#/definitions/Error"
