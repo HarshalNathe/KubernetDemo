@@ -1,2 +1,4 @@
 /employee:
   $ref: ./employee.yaml
+/emp:
+  $ref: ./mysqlEmployee.yaml

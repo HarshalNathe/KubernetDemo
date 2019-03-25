@@ -4,7 +4,7 @@ post:
   description: "Create a new employee"
   summary: "Create a new employee"
   tags:
-    - "/Employee"
+    - "MongoAtlas Employee"
   parameters:
     - name: employee
       in: body
@@ -26,7 +26,7 @@ get:
   description: "Get all employee"
   summary: "Get all employee"
   tags:
-    - "/Employee"
+    - "MongoAtlas Employee"
   parameters:
     - name: skip
       in: query
@@ -52,7 +52,7 @@ put:
   description: "Update a existing employee"
   summary: "Update a existing employee"
   tags:
-    - "/Employee"
+    - "MongoAtlas Employee"
   parameters:
     - name: employee
       in: body
@@ -74,7 +74,7 @@ delete:
   description: "Delete employee through employeeId"
   summary: "Delete employee through employeeId"
   tags:
-    - "/Employee"
+    - "MongoAtlas Employee"
   parameters:
     - name: employeeId
       in: query

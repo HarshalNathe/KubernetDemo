@@ -1,0 +1,27 @@
+x-swagger-router-controller: employee-controller
+get:
+  operationId: employees
+  description: "Get all employee from MySQL database"
+  summary: "Get all employee"
+  tags:
+    - "MySQL Employee"
+  parameters:
+    - name: skip
+      in: query
+      description: "Specify the number of records to skip"
+      required: false
+      type: integer
+    - name: limit
+      in: query
+      description: "Provide limit value range is 1 - 1000"
+      required: false
+      type: integer
+  responses:
+    "200":
+      description: "Success"
+      schema:
+        $ref: "#/definitions/Employee"
+    "403":
+      description: "Invalid employee"
+      schema:
+        $ref: "#/definitions/Error"

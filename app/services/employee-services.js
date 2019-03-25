@@ -1,7 +1,7 @@
 'use strict'
 
-var config = require("config");
 var Employee = require('../models/employee');
+var mysql = require('mysql');
 
 /** Add new employee */
 
@@ -23,6 +23,61 @@ exports.post = function addEmployee(headers, args, res) {
     return res.json(employee);
   });
 };
+
+/** get details of employee from MySQL DB */
+
+/// FYI: use Q npm for getting count
+
+exports.mysqlGet = function mysqlEmpGet(headers, args, res) {
+  var pageOptions = {
+    skip: args.skip.value || 0,
+    limit: args.limit.value || 50
+  };
+
+  var pool = mysql.createPool({
+    connectionLimit: 10,
+    host: '104.197.185.183',
+    user: 'node',
+    password: 'Lexicon2019!',
+    database: 'NodeJS'
+  });
+
+  let query = `SELECT * FROM Employee ORDER BY CREATED_AT LIMIT ${pageOptions.limit} OFFSET ${pageOptions.skip};`;
+  let countQuery = `SELECT COUNT(*) as counts FROM Employee;`;
+
+  if (pageOptions.limit > 1000) {
+    let response = {
+      status: 'fail',
+      error: {
+        category: 'REQUESTED RANGE NOT SATISFIABLE',
+        message: 'The requested limit range is not valid it should be less than 1000.'
+      }
+    }
+    return res.status(404).json(response);
+  } else {
+    pool.query(query, function (error, results, fields) {
+      if (error) {
+        throw error;
+      }
+      pool.query(countQuery, function (error, countResults, fields) {
+        if (error) {
+          throw error;
+        }
+        var response = {
+          meta: {
+            status: 'ok',
+            tableTotal: countResults[0].counts,
+            skip: pageOptions.skip,
+            onThisPage: results.length,
+            totalPages: Math.ceil(countResults[0].counts / pageOptions.limit)
+          },
+          employee: results
+        };
+        return res.json(response);
+      });
+    });
+  }
+}
 
 /** get details of employee through employeeID */
 
@@ -52,7 +107,7 @@ exports.get = function fetchEmployee(headers, args, res) {
         if (error) {
           res.status(401).json(error);
         }
-        Employee.count({}, function (countErr, count) {
+        Employee.countDocuments({}, function (countErr, count) {
           if (countErr) {
             throw countErr;
           }

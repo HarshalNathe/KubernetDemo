@@ -6,19 +6,21 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var swaggerTools = require('swagger-tools');
 var YAML = require('yaml-js');
-var env = process.env.NODE_ENV || 'development';
 var config = require('config');
 var cors = require('cors');
 var resolve = require('json-refs').resolveRefs;
 var fs = require('fs');
 var path = require('path');
-var _mongoURL = config.get('mongoDB.url')
-var _swaggerHost = config.get('development.swaggerHost')
+var ip = require('ip');
+var _mongoURL = config.get('mongoDB.url');
+var _swaggerHost = config.get('development.swaggerHost');
 // configuration ===========================================
+
+
 
 var port = process.env.PORT || 7000; // set our port
 
-mongoose.connect(_mongoURL, function (err, connected) {
+mongoose.connect(_mongoURL, { useNewUrlParser: true }, function (err, connected) {
   if (err) {
     console.log(err);
   }
@@ -40,7 +42,7 @@ app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-M
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 var root = YAML.load(fs.readFileSync(path.join(__dirname, 'app/swagger') + '/swagger.yaml').toString());
-root.host = _swaggerHost;
+root.host = _swaggerHost || `${ip.address()}:${port}`;
 var options = {
   filter: ['relative', 'remote'],
   loaderOptions: {
@@ -66,22 +68,18 @@ function haltOnTimedout(req, res, next) {
     next();
   } else {
     next(new Error("the request timed out"), null, null, null, 504);
-    //next(new Error("the request timed out")); // other args passed by closure
   }
 }
 
 resolve(root, options).then(function (results) {
   swaggerTools.initializeMiddleware(results.resolved, function (middleware) {
-    // Serves the Swagger UI on /docs
+
     var routerConfig = {
       controllers: './app/controllers',
       useStubs: false
-    }
-    app.use(cors())
-    // app.use(morgan('tiny'))
-    // app.use(morgan('combined', {
-    //   stream: accessLogStream
-    // }))
+    };
+
+    app.use(cors());
     app.use(middleware.swaggerMetadata())
 
     // Validate Swagger requests
@@ -97,9 +95,6 @@ resolve(root, options).then(function (results) {
     });
   });
 });
-
-
-
 
 // // routes ==================================================
 // require('./app/routes')(app); // pass our application into our routes
