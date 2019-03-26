@@ -1,0 +1,22 @@
+x-swagger-router-controller: employee-controller
+get:
+  operationId: error
+  description: "Collapse Application"
+  summary: "Collapse Application"
+  tags:
+    - "Error"
+  parameters:
+    - name: skip
+      in: query
+      description: "Specify the number of records to skip"
+      required: false
+      type: integer
+  responses:
+    "200":
+      description: "Success"
+      schema:
+        $ref: "#/definitions/Error"
+    "403":
+      description: "Pass valid data"
+      schema:
+        $ref: "#/definitions/Error"

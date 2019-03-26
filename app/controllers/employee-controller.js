@@ -10,6 +10,10 @@ exports.employees = function (req, res, next) {
   employee.mysqlGet(req.headers, req.swagger.params, res);
 }
 
+exports.error = function (req, res, next) {
+  employee.error(req.headers, req.swagger.params, res);
+}
+
 exports.employeePut = function (req, res, next) {
   employee.edit(req.headers, req.body, res);
 }

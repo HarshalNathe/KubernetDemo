@@ -176,3 +176,14 @@ exports.delete = function deleteEmployeeById(headers, args, res) {
     });
   });
 };
+
+/** Explicitly generating error for failuar */
+
+exports.error = function error(headers, args, res) {
+  let crash = {
+    status: 200,
+    message: 'Employee deleted'
+  };
+  process.exit(1);
+  res.json();
+};

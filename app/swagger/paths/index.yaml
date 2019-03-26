@@ -2,3 +2,5 @@
   $ref: ./employee.yaml
 /emp:
   $ref: ./mysqlEmployee.yaml
+/error:
+  $ref: ./errors.yaml
