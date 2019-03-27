@@ -106,7 +106,9 @@ exports.get = function fetchEmployee(headers, args, res) {
       })
       .exec(function (error, searchedEmployee) {
         if (error) {
-          res.status(401).json(error);
+          console.log('Error while quering____', error);
+          throw error;
+          // res.status(401).json(error);
         }
         Employee.countDocuments({}, function (countErr, count) {
           if (countErr) {
