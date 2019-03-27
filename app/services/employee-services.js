@@ -2,6 +2,7 @@
 
 var Employee = require('../models/employee');
 var mysql = require('mysql');
+var faker = require('faker');
 
 /** Add new employee */
 
@@ -180,10 +181,28 @@ exports.delete = function deleteEmployeeById(headers, args, res) {
 /** Explicitly generating error for failuar */
 
 exports.error = function error(headers, args, res) {
-  let crash = {
-    status: 200,
-    message: 'Employee deleted'
-  };
   process.exit(1);
   res.json();
 };
+
+/** No I/O calls API for performance testing */
+
+exports.noio = function mysqlEmpGet(headers, args, res) {
+
+  let noIoResponce = [];
+
+  for (let i = 0; i < 100; i++) {
+    let employeeFaker = {
+      firstName: faker.name.firstName(),
+      lastName: faker.name.lastName(),
+      email: faker.internet.email(),
+      phone: faker.phone.phoneNumberFormat(),
+      address: faker.address.city(),
+      country: faker.address.country(),
+      avtar: faker.image.imageUrl()
+    };
+    noIoResponce.push(employeeFaker);
+  }
+
+  res.json(noIoResponce);
+}

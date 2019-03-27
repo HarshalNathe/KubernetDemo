@@ -1,26 +1,4 @@
 x-swagger-router-controller: employee-controller
-post:
-  operationId: employeePost
-  description: "Create a new employee"
-  summary: "Create a new employee"
-  tags:
-    - "MongoAtlas Employee"
-  parameters:
-    - name: employee
-      in: body
-      description: "Fill up the employee details"
-      required: true
-      schema:
-        $ref: "#/definitions/Employee"
-  responses:
-    "200":
-      description: "Success"
-      schema:
-        $ref: "#/definitions/Employee"
-    "403":
-      description: "Pass valid data"
-      schema:
-        $ref: "#/definitions/Error"
 get:
   operationId: employeeGet
   description: "Get all employee"
@@ -47,7 +25,31 @@ get:
       description: "Invalid employee"
       schema:
         $ref: "#/definitions/Error"
+post:
+  deprecated: true
+  operationId: employeePost
+  description: "Create a new employee"
+  summary: "Create a new employee"
+  tags:
+    - "MongoAtlas Employee"
+  parameters:
+    - name: employee
+      in: body
+      description: "Fill up the employee details"
+      required: true
+      schema:
+        $ref: "#/definitions/Employee"
+  responses:
+    "200":
+      description: "Success"
+      schema:
+        $ref: "#/definitions/Employee"
+    "403":
+      description: "Pass valid data"
+      schema:
+        $ref: "#/definitions/Error"
 put:
+  deprecated: true
   operationId: employeePut
   description: "Update a existing employee"
   summary: "Update a existing employee"
@@ -70,6 +72,7 @@ put:
       schema:
         $ref: "#/definitions/Error"
 delete:
+  deprecated: true
   operationId: employeeDelete
   description: "Delete employee through employeeId"
   summary: "Delete employee through employeeId"

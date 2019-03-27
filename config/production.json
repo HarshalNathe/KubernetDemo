@@ -3,6 +3,6 @@
     "swaggerHost": "169.53.13.73:8000"
   },
   "mongoDB": {
-    "url": "mongodb://admin:Lexicon2019@mongocluster01-shard-00-00-avx0q.gcp.mongodb.net:27017,mongocluster01-shard-00-01-avx0q.gcp.mongodb.net:27017,mongocluster01-shard-00-02-avx0q.gcp.mongodb.net:27017/KBE?ssl=true&replicaSet=MongoCluster01-shard-0&authSource=admin&retryWrites=true"
+    "url": "mongodb://admin:Lexicon2019@mongocluster01-shard-00-00-avx0q.gcp.mongodb.net:27017,mongocluster01-shard-00-01-avx0q.gcp.mongodb.net:27017,mongocluster01-shard-00-02-avx0q.gcp.mongodb.net:27017/KBE?ssl=true&replicaSet=MongoCluster01-shard-0&authSource=admin&retryWrites=true&readPreference=secondary&maxStalenessSeconds=120"
   }
 }

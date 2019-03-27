@@ -2,5 +2,7 @@
   $ref: ./employee.yaml
 /emp:
   $ref: ./mysqlEmployee.yaml
+/facker:
+  $ref: ./noio.yaml
 /error:
   $ref: ./errors.yaml

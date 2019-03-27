@@ -10,6 +10,10 @@ exports.employees = function (req, res, next) {
   employee.mysqlGet(req.headers, req.swagger.params, res);
 }
 
+exports.noio = function (req, res, next) {
+  employee.noio(req.headers, req.swagger.params, res);
+}
+
 exports.error = function (req, res, next) {
   employee.error(req.headers, req.swagger.params, res);
 }
